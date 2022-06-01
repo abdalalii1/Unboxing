@@ -68,6 +68,22 @@ let drinksJson = """
 let drinks = try JSONDecoder().decodeHeterogeneousArray(OfFamily: DrinkFamily.self, from: drinksJson)
 ```
 
+### Update
+
+In case you need to be able to decode heterogenous values — including nested arrays and dictionaries — then you need AnyDecodable:
+
+
+```Swift
+
+let json = """
+    {"type": "soda", "sugar_content": 5, "alcoholic_drink": false, "description": null}
+""".data(using: .utf8)!
+
+let decoder = JSONDecoder()
+let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
+        
+```
+
 ### Installation
 
 Swift Package Manager:
